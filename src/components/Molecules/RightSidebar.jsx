@@ -7,6 +7,9 @@ import Advertisement from "./Advertisement";
 const RightSidebar = () => {
   const data = getSelected();
   const items = data.slice(3, data.length);
+  
+  
+  console.log(items)
 
   const list = items.map((item) => (
     <div key={item.id} className="box">
@@ -22,13 +25,13 @@ const RightSidebar = () => {
     </div>
   ));
   return (
-    <aside>
-      <div>
-        <h2 className="ad-title">বিজ্ঞাপন</h2>
-        <Advertisement type="portrait" />
+    <aside className="right-sidebar">
+   
+        <h2 className="title">বিজ্ঞাপন</h2>
+        <Advertisement  type="portrait" />
         <hr className="seperator" />
         {items.length !== 0 && list}
-      </div>
+  
     </aside>
   );
 };

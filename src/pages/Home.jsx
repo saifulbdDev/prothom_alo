@@ -9,15 +9,18 @@ const HomePage = () => {
     <div className="container">
       <MetaData title="প্রথম আলো | বাংলা নিউজ পেপার" />
       <div className="row">
-        <div className="col-1">
+        <div className="col-3">
           <LeftSidebar />
         </div>
-        <div className="col-2">
+        <div className="col-9 right-row">
+          <div className="col-8">
           <Featured />
-        </div>
-        <div className="col-1">
+          </div>
+          <div className="col-4">
           <RightSidebar />
+          </div>
         </div>
+       
       </div>
     </div>
   );

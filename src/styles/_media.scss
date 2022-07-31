@@ -1,54 +1,105 @@
-$devices: (
-  phone: 480px,
-  tablet: 768px,
-  desktop: 992px,
-  large-desktop: 1200px,
+//
+//  MEDIA QUERIES
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// A map of breakpoints.
+$breakpoints: (
+  xs: 576px,
+  xsm:600px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
 );
 
-@mixin min-device($device: map-get($devices, "phone")) {
-  @if map-has-key($devices, $device) {
-    @media screen and (min-width: map-get($devices, $device)) {
+
+//
+//  RESPOND ABOVE
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// @include respond-above(sm) {}
+@mixin respond-above($breakpoint) {
+
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (min-width: $breakpoint-value) {
       @content;
     }
+  
+  // If the breakpoint doesn't exist in the map.
+  } @else {
+
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
 
-@mixin max-device($device: map-get($devices, "phone")) {
-  @if map-has-key($devices, $device) {
-    @media screen and (max-width: map-get($devices, $device)) {
+
+//
+//  RESPOND BELOW
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// @include respond-below(sm) {}
+@mixin respond-below($breakpoint) {
+
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (max-width: ($breakpoint-value - 1)) {
       @content;
     }
+  
+  // If the breakpoint doesn't exist in the map.
+  } @else {
+
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
 
-@mixin only-device($device: map-get($devices, "phone")) {
-  @if map-has-key($devices, $device) {
-    $devices-length: length($devices);
-    $map-list: map-keys($devices);
 
-    @if index($map-list, $device) == $devices-length {
-      @include min-device($device) {
-        @content;
-      }
-    } @else {
-      $next-device-index: index($map-list, $device) + 1;
-      $next-device-key: nth($map-list, $next-device-index);
+//
+//  RESPOND BETWEEN
+//––––––––––––––––––––––––––––––––––––––––––––––––––
 
-      @media screen and (min-width: map-get($devices, $device)) and (max-width: map-get($devices, $next-device-key) ) {
-        @content;
-      }
-    }
-  }
-}
+// @include respond-between(sm, md) {}
+@mixin respond-between($lower, $upper) {
 
-@mixin between-devices(
-  $min-device: map-get($devices, "phone"),
-  $max-device: map-get($devices, "tablet")
-) {
-  @if map-has-key($devices, $min-device) and map-has-key($devices, $max-device)
-  {
-    @media screen and (min-width: map-get($devices, $min-device)) and (max-width: map-get($devices, $max-device)) {
+  // If both the lower and upper breakpoints exist in the map.
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+
+    // Get the lower and upper breakpoints.
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
+
+    // Write the media query.
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
       @content;
+    }
+  
+  // If one or both of the breakpoints don't exist.
+  } @else {
+
+    // If lower breakpoint is invalid.
+    @if (map-has-key($breakpoints, $lower) == false) {
+
+      // Log a warning.
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    // If upper breakpoint is invalid.
+    @if (map-has-key($breakpoints, $upper) == false) {
+
+      // Log a warning.
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
     }
   }
 }

@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-
+import Advertisement from "./Advertisement";
 import NewsList from "./NewsList";
 import data from "../../sample-datar5.json";
 
 const LeftSidebar = () => {
+  const navMenu = [
+    { name: "latest", title: "সর্বশেষ" },
+    { name: "mostread", title: "পঠিত" },
+    { name: "discussed", title: "আলোচিত" },
+  ];
 
   const [news, setNews] = useState(data?.latest?.items);
   const [toggleState, setToggleState] = useState("latest");
@@ -13,24 +18,14 @@ const LeftSidebar = () => {
     setToggleState(value);
   };
 
-  const navMenu = [
-    { name: "latest", title: "সর্বশেষ" },
-    { name: "mostread", title: "পঠিত" },
-    { name: "discussed", title: "আলোচিত" },
-  ];
-
-  const getActiveClass = (index, className) => {
-    return toggleState === index ? className : "";
-  };
-
   return (
     <aside>
       <div className="tab-nav">
         {navMenu.map((item) => {
           return (
             <button
-            key={item.name}
-              className={`tabs ${item.name === toggleState ? 'active':''}`}
+              key={item.name}
+              className={`tabs ${item.name === toggleState ? "active" : ""}`}
               onClick={() => toggleTab(item.name)}
             >
               {item.title}
@@ -42,7 +37,8 @@ const LeftSidebar = () => {
         <div className="tab-body-content">
           <NewsList items={news} />
         </div>
-       
+        <h2 className="title">বিজ্ঞাপন</h2>
+        <Advertisement  type="portrait" />
       </div>
     </aside>
   );

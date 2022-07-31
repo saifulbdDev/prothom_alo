@@ -12,6 +12,51 @@ body {
   margin: 0;
   font-family: "SolaimanLipi", sans-serif;
 }
+.main {
+  @include respond-above("lg") {
+    padding: 30px;
+  }
+  @include respond-above("md") {
+    padding: 15px;
+  }
+}
+.container {
+  max-width: 100%;
+ margin: 0 auto;
+  padding: 15px;
+  @include respond-above("lg") {
+    max-width: 1140px;
+  }
+  .row {
+    width: 100%;
+    display: grid;
+    @include respond-above("lg") {
+      grid-template-columns: 25% 75% !important;
+
+      gap: 30px;
+    }
+    @include respond-above("xsm") {
+      grid-template-columns: 1fr 2fr;
+
+      gap: 30px;
+    }
+  }
+  .right-row {
+    display: grid;
+    @include respond-above("lg") {
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+  }
+  .col-1 {
+    @include respond-above("md") {
+    }
+    @include respond-between(sm, md) {
+    }
+  }
+  .col-2 {
+  }
+}
 
 header {
   .logo {
@@ -21,22 +66,6 @@ header {
   }
   box-shadow: 0 5px 5px 0 rgb(0 0 0 / 20%);
   border-top: 1px solid $border;
-}
-
-.container {
-  max-width: 1400px;
-  margin: auto;
-  padding: 30px;
-  .row {
-    display: flex;
-    gap: 30px;
-  }
-  .col-1 {
-    width: 25%;
-  }
-  .col-2 {
-    width: 50%;
-  }
 }
 
 span.bluebox {
@@ -66,12 +95,7 @@ span.h3-title {
   border-bottom: 2px solid $border;
   button {
     cursor: pointer;
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    margin-right: 12px;
-    font-weight: bold;
-    padding: 10px 14px;
+    @include title1;
     color: $text;
     &:hover {
       color: $gray;
@@ -84,6 +108,7 @@ span.h3-title {
   }
 }
 .tab-body {
+  
   .tab-body-content {
     .tab-content-list {
       list-style: none;
@@ -108,28 +133,68 @@ span.h3-title {
         @include title2;
       }
       h3 {
-        @include title3;
+        font-size: 34px;
+        margin: 0px;
       }
     }
   }
-}
-
-.box {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid $border;
-  padding-bottom: 20px;
-  .left {
-    width: 60%;
+  .portrait {
+    display: block;
+    @include respond-above("lg") {
+      display: none;
+    }
   }
-  .right {
-    width: 40%;
-  }
-
-  h3 {
+  .title {
     margin-top: 0px;
-    margin-bottom: 10px;
+    display: block;
+    @include title1;
+    @include respond-above("lg") {
+      display: none;
+    }
+  }
+}
+.right-sidebar {
+  .portrait {
+    display: none;
+    @include respond-above("lg") {
+      display: block;
+    }
+  }
+  .title {
+    margin-top: 0px;
+    display: none;
+    @include title1;
+    @include respond-above("lg") {
+      display: block;
+    }
+  }
+  .box {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $border;
+    padding-bottom: 20px;
+    &:last-child {
+      border: none;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    }
+    .left {
+      width: 60%;
+      h2 {
+        @include title2;
+        color: $text;
+        margin-top: 0px;
+      }
+    }
+    .right {
+      width: 40%;
+    }
+
+    h3 {
+      margin-top: 0px;
+      margin-bottom: 10px;
+    }
   }
 }
 
@@ -137,29 +202,55 @@ span.h3-title {
   width: 100%;
 }
 
-.featured-box {
-  position: relative;
-  h2 {
-    position: absolute;
-    bottom: 0px;
-    color: #ffb300;
-    padding: 30px;
-    padding-bottom: 15px;
+.featured {
+  .featured-title {
+    @include title1;
+    color: $gray;
+    margin-top: 0px;
+  }
+  .featured-box {
+    position: relative;
+    h2 {
+      position: absolute;
+      bottom: 0px;
+      color: #ffb300;
+      padding: 30px;
+      padding-bottom: 15px;
+    }
   }
 }
-
 .rest-selected {
   padding: 30px 0px;
   display: flex;
   gap: 30px;
+  .rest-selected-box {
+    .rest-selected-box-title {
+      h2 {
+        @include title2;
+        color: $text;
+      }
+    }
+  }
   h3 {
-    color: $gray;
+    color: $text;
   }
 }
 
 // footer
 footer {
   text-align: center;
-  border-top: 1px solid $border;
+  
+  
   padding: 20px 0px;
+  .landscape{
+    width: 70%;
+    margin: 0 auto;
+    max-height: 150px;
+    min-height: 50px;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
 }
