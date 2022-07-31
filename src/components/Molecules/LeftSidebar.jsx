@@ -35,7 +35,7 @@ const LeftSidebar = () => {
       </div>
       <div className="tab-body">
         <div className="tab-body-content">
-          <NewsList items={news} />
+          <NewsList path={toggleState} items={news} />
         </div>
         <h2 className="title">বিজ্ঞাপন</h2>
         <Advertisement  type="portrait" />

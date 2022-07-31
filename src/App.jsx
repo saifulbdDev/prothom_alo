@@ -7,7 +7,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path=":id" element={<SingleNewsPage />} />
+      <Route path="/:name/:id" element={<SingleNewsPage />} />
     </Routes>
   );
 }

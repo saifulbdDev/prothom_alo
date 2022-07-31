@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Title from "../../components/atoms/Title";
-const NewsList = ({ items }) => {
+const NewsList = ({ items, path }) => {
   const numberBd = (value) => value.toLocaleString("bn-BD");
   const List = items.map((item, index) => (
     <li key={item.id}>
       <h3>{numberBd(index + 1)}</h3>
       <div className="news-card">
-        <Link to={`/${item.id}`}>
+        <Link to={`/${path}/${item.id}`}>
           <Title headline={item.headline} subheadline={item.subheadline} />
         </Link>
       </div>

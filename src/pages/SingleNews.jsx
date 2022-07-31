@@ -4,9 +4,11 @@ import MetaData from "../components/atoms/MetaData";
 import { getItem } from "../Service/getData";
 
 const SingleNewsPage = () => {
-  const { id } = useParams();
-  const data = getItem(id);
-  //   console.log(data);
+  const { id, name } = useParams();
+  
+  const data = getItem(name, parseInt(id));
+  console.log(data, 'data')
+   
   return (
     <div className="container single">
       <MetaData title={data.headline} />

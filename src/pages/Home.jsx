@@ -1,4 +1,5 @@
 import React from "react";
+import Advertisement from "../components/Molecules/Advertisement";
 import Featured from "../components/Molecules/Featured";
 import MetaData from "../components/atoms/MetaData";
 import LeftSidebar from "../components/Molecules/LeftSidebar";
@@ -22,6 +23,7 @@ const HomePage = () => {
         </div>
        
       </div>
+      <Advertisement  type="landscape" />
     </div>
   );
 };
